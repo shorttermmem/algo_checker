@@ -116,9 +116,6 @@ class Tree:
     def delete(self, node):
         pass
 
-    def is_binary_tree(self):
-        return self._root is not None
-
 
 class TreeFromArray(Tree):
     def __init__(self, arr):
@@ -175,22 +172,4 @@ class TreeFromArray(Tree):
 
     def __repr__(self):
         return TreeFromArray.print_nodes(self._root)
-
-    def is_binary_tree(self):
-        return self._root is not None
-
-
-class TreeFactory:
-    @staticmethod
-    def create_binary_tree():
-        arr = [0, 1, 2, 3, 4, 5]
-        return TreeFromArray(arr)
-
-    @staticmethod
-    def create_perfect_tree(height):
-        """ node count n is 2 ^ h """
-        n = pow(2, height)
-        arr = range(0, n-1)
-        return TreeFromArray(arr)
-
 
