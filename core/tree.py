@@ -8,8 +8,8 @@ class Node:
         self.name = node_name
         self.data = node_data,
         self.children = [None, None]
-        self.left = self.children[0]
-        self.right = self.children[1]
+        self.left = None
+        self.right = None
         """private members"""
         self._parent_name = parent_name
         self._count = 0
@@ -26,6 +26,10 @@ class Node:
     def add_child(self, child):
         if self._count < 2:
             self.children[self._count] = child
+            if self._count is 0:
+                self.left = child
+            if self._count is 1:
+                self.right = child
         else:
             if len(self.children) == self._max_count:
                 raise Exception('Exceeds max number of children.')
@@ -41,42 +45,6 @@ class Node:
 
     def get_parent_name(self):
         return self._parent_name
-
-
-def walk_bfs(root, lambda_fn=None, lambda_arg=None):
-    q = Queue()
-    q.put(root)
-    while not q.empty():
-        visit_node = q.get()
-        if lambda_fn:
-            if lambda_fn(visit_node, lambda_arg):
-                return visit_node
-        for unvisited_node in visit_node.get_children():
-            q.put(unvisited_node)
-    return
-
-
-def walk_dfs(root, lambda_fn=None, lambda_arg=None):
-    if not root:
-        return
-    if lambda_fn:
-        if lambda_fn(root, lambda_arg):
-            return root
-    for child in root.get_children():
-        walk_dfs(child, lambda_fn, lambda_arg)
-
-
-def same_tree(root1, root2, lambda_fn=None, lambda_arg=None):
-    # Check root
-    if root1 != root2:
-        return False
-
-    for child1, child2 in zip(root1.get_children(), root2.get_children()):
-        if not lambda_fn(child1, child2, lambda_arg):
-            return False
-        else:
-            same_tree(child1, child2, lambda_fn, lambda_arg)
-    return True
 
 
 class Tree:
@@ -151,19 +119,19 @@ class TreeFromArray(Tree):
         str_tree = ''
 
         # left branch
-        ldata = TreeFromArray.print_nodes(node.left)
+        left_data = TreeFromArray.print_nodes(node.left)
 
-        if ldata:
-            str_tree += ('{' + ldata + ' -> ')
+        if left_data:
+            str_tree += ('{' + left_data + ' -> ')
 
         # visit
         str_tree += str(node.name)
 
         # right branch
-        rdata = TreeFromArray.print_nodes(node.right)
+        right_data = TreeFromArray.print_nodes(node.right)
 
-        if rdata:
-            str_tree += (' <- ' + rdata + '}')
+        if right_data:
+            str_tree += (' <- ' + right_data + '}')
 
         return str_tree
 
@@ -173,3 +141,39 @@ class TreeFromArray(Tree):
     def __repr__(self):
         return TreeFromArray.print_nodes(self._root)
 
+
+# Utility functions
+def walk_bfs(root, lambda_fn=None, lambda_arg=None):
+    q = Queue()
+    q.put(root)
+    while not q.empty():
+        visit_node = q.get()
+        if lambda_fn:
+            if lambda_fn(visit_node, lambda_arg):
+                return visit_node
+        for unvisited_node in visit_node.get_children():
+            q.put(unvisited_node)
+    return
+
+
+def walk_dfs(root, lambda_fn=None, lambda_arg=None):
+    if not root:
+        return
+    if lambda_fn:
+        if lambda_fn(root, lambda_arg):
+            return root
+    for child in root.get_children():
+        walk_dfs(child, lambda_fn, lambda_arg)
+
+
+def same_tree(root1, root2, lambda_fn=None, lambda_arg=None):
+    # Check root
+    if root1 != root2:
+        return False
+
+    for child1, child2 in zip(root1.get_children(), root2.get_children()):
+        if not lambda_fn(child1, child2, lambda_arg):
+            return False
+        else:
+            same_tree(child1, child2, lambda_fn, lambda_arg)
+    return True

@@ -2,7 +2,9 @@
   <configuration default="false" name="Unittests" type="tests" factoryName="Unittests" singleton="true">
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
-    <envs />
+    <envs>
+      <env name="_DEBUG" value="True" />
+    </envs>
     <option name="SDK_HOME" value="/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
     <option name="IS_MODULE_SDK" value="false" />
