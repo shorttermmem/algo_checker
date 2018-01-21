@@ -7,7 +7,7 @@ class BinaryTreeFactory:
     def create_perfect_tree():
         """Tree: {None: 1}{1: 2}{1: 3}{2: 4}{2: 5}{3: 6}{3: 7}"""
         tree = Tree()
-        tree.insert(Node(1))
+        tree.insert(Node(1, parent_name=None))
         tree.insert(Node(2, parent_name=1))
         tree.insert(Node(3, parent_name=1))
         tree.insert(Node(4, parent_name=2))
@@ -20,7 +20,7 @@ class BinaryTreeFactory:
     def create_complete_tree():
         """Tree: {None: 1}{1: 2}{1: 3}{2: 4}{2: 5}{3: 6}"""
         tree = Tree()
-        tree.insert(Node(1))
+        tree.insert(Node(1, parent_name=None))
         tree.insert(Node(2, parent_name=1))
         tree.insert(Node(3, parent_name=1))
         tree.insert(Node(4, parent_name=2))
@@ -32,7 +32,7 @@ class BinaryTreeFactory:
     def create_full_tree():
         """Tree: {None: 1}{1: 2}{1: 3}{3: 6}{3: 7}"""
         tree = Tree()
-        tree.insert(Node(1))
+        tree.insert(Node(1, parent_name=None))
         tree.insert(Node(2, parent_name=1))
         tree.insert(Node(3, parent_name=1))
         tree.insert(Node(6, parent_name=3))
@@ -43,7 +43,7 @@ class BinaryTreeFactory:
     def create_balanced_tree():
         """Tree: {None: 1}{1: 2}{1: 3}{2:4}{3: 6}{3: 7}"""
         tree = Tree()
-        tree.insert(Node(1))
+        tree.insert(Node(1, parent_name=None))
         tree.insert(Node(2, parent_name=1))
         tree.insert(Node(3, parent_name=1))
         tree.insert(Node(4, parent_name=2))
@@ -55,7 +55,7 @@ class BinaryTreeFactory:
     def create_unbalanced_tree():
         """Tree: {None: 1}{1: 2}{1: 3}{3: 6}{3: 7}{6: 8}"""
         tree = Tree()
-        tree.insert(Node(1))
+        tree.insert(Node(1, parent_name=None))
         tree.insert(Node(2, parent_name=1))
         tree.insert(Node(3, parent_name=1))
         tree.insert(Node(4, parent_name=2))
