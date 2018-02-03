@@ -11,19 +11,20 @@ class UndirectedGraphTestCase(unittest.TestCase):
     def test_simple_graph(self):
 
         graph = GraphFactory.create_graph()
-
+        count = len(graph.get_nodes())
         for node in graph.get_nodes():
-            node.add_edges([
-                (graph.get_random_node().name, 0),
-                (graph.get_random_node().name, 0)
-            ])
+            max_edge_per_node = random.randint(0, count)
+            for _ in range(max_edge_per_node):
+                node.add_edges([
+                    (graph.get_random_node().name, 0)
+                ])
         is_directed_graph_ver1()
 
         log.debug(graph)
         self.assertTrue(True)
 
     def setUp(self):
-        pass
+        log.info("\nEnter " + __class__.__name__ + "...")
 
     def tearDown(self):
-        pass
+        log.info("Done " + __class__.__name__ + "\n")

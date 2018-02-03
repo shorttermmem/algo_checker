@@ -5,17 +5,16 @@ from enum import Enum
 class Graph:
     """ Implemented as Adjacency-list """
     _ref_link = "https://xlinux.nist.gov/dads/HTML/adjacencyListRep.html"
-    SELF_REFERENCING_EDGE_WEIGHT = 0
+    SELF_REFERENCING_EDGE_WEIGHT = None
 
     class Node:
         """ Graph node """
-
-        def __init__(self, node_name, node_weight=0):
+        def __init__(self, node_name, node_data=0):
             self.name = node_name
-            self.weight = node_weight
+            self.data = node_data
             """ private """
-            edge = (node_name, node_weight)
-            self._edges = {edge}
+            # _edges is (node_name, node_data)
+            self._edges = set()
 
         def add_edges(self, *edges):
             """ edges are array of tuples(node_name, weight=0) """
@@ -29,20 +28,20 @@ class Graph:
             return map(lambda edge: edge[0], self.get_edges())
 
         def __str__(self):
-            return "Node<" + self.name + ":" + str(self.weight) + ">:" + "->".join(
-                [" edge(" + edge[0] + ", " + str(edge[1]) + ") " for edge in self._edges]
-            ) + "\n"
+            return "\tNode<" + str(self.name) + ":" + str(self.data) + ">:" + "->".join(
+                [" edge(" + str(edge[0]) + ", " + str(edge[1]) + ") " for edge in self._edges]
+            )
 
     class Type(Enum):
         """ Graph types """
         DEFAULT = 0
         DIRECTED = 1
 
-    def __init__(self, node_count=0, graph_type=Type.DEFAULT):
+    def __init__(self, node_count, graph_type=Type.DEFAULT):
         """ private """
         self._graph_type = graph_type
         self._nodes = set([
-            Graph.Node(str(node_name), Graph.SELF_REFERENCING_EDGE_WEIGHT) for node_name in range(node_count)
+            Graph.Node(name, Graph.SELF_REFERENCING_EDGE_WEIGHT) for name in range(node_count)
         ])
 
     @property
@@ -56,14 +55,14 @@ class Graph:
     def get_random_node(self):
         return random.choice(tuple(self._nodes))
 
-    def add_node(self, node_name, node_weight=0):
-        self._nodes.add(Graph.Node(node_name, node_weight))
+    def add_node(self, node_name, node_data=0):
+        self._nodes.add(Graph.Node(node_name, node_data))
 
     def get_nodes(self):
         return list(self._nodes)
 
     def __str__(self):
-        return "\n " + " ".join(str(node) for node in sorted(self._nodes, key=lambda node: node.name))
+        return "Graph\n" + "\n".join(str(node) for node in sorted(self._nodes, key=lambda node: node.name))
 
 
 class DeprecatedGraph:
