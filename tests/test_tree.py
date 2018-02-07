@@ -1,6 +1,6 @@
 import unittest
 
-from algorithms.process_tree import is_balanced_tree_ver1
+from algorithms.process_tree import *
 from common.logger import log
 from common.tree_factory import BinaryTreeFactory
 
@@ -33,6 +33,22 @@ class BinaryTreeTestCase(unittest.TestCase):
         is_complete_tree_balanced = is_balanced_tree_ver1(complete_tree.get_root())
         self.assertTrue(is_complete_tree_balanced)
 
+    def test_tree_walk_sample(self):
+        tree = BinaryTreeFactory.create_unbalanced_tree()
+        log.info("Tree:")
+        log.info(tree)
+
+        log.info("Pre-order:")
+        walk_preorder(tree.get_root())
+
+        log.info("In-order:")
+        walk_inorder(tree.get_root())
+
+        log.info("Post-order:")
+        walk_postorder(tree.get_root())
+        self.assertTrue(True)
+
+    def test_is_unbalanced_tree(self):
         balanced_tree = BinaryTreeFactory.create_balanced_tree()
         log.debug(balanced_tree)
         is_balanced_tree_balanced = is_balanced_tree_ver1(balanced_tree.get_root())

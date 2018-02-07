@@ -6,12 +6,16 @@ class Node:
 
     def __init__(self, node_name, node_data=None, parent_name=None, max_children=2):
         self.name = node_name
-        self.data = node_data,
+        if node_data is None:
+            self.data = node_name
+        else:
+            self.data = node_data
         self.children = [None, None]
         self.left = None
         self.right = None
         """private members"""
         self._parent_name = parent_name
+        self._parent_node = None
         self._count = 0
         self._max_count = max_children
 
@@ -21,15 +25,18 @@ class Node:
         return self.name == other.name
 
     def __str__(self):
-        return '{{ {0}:{1} }}'.format(self._parent_name, self.name)
+        return '{{ {0}->{1} }}'.format(self._parent_name, self.name)
 
     def add_child(self, child):
         if self._count < 2:
-            self.children[self._count] = child
-            if self._count is 0:
+            child._parent_node = self
+            if self.left is None and child.data < self.data:
                 self.left = child
-            if self._count is 1:
+            elif self.right is None and child.data > self.data:
                 self.right = child
+            else:
+                raise Exception('Cannot add child ' + str(child) + ' to parent ' + str(self))
+            self.children[self._count] = child
         else:
             if len(self.children) == self._max_count:
                 raise Exception('Exceeds max number of children.')
@@ -78,7 +85,8 @@ class Tree:
         else:
             target = walk_bfs(self._root, lambda x, y: x.name == y, node.get_parent_name())
             if not target:
-                raise Exception('Parents not found for {0}.'.format(node))
+                err = 'Parents not found! {0} : {parent -> child}'.format(str(node))
+                raise Exception(err)
             return target.add_child(node)
 
     def delete(self, node):

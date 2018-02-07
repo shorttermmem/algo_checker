@@ -1,3 +1,6 @@
+from common.logger import log
+
+
 def is_balanced_tree_ver1(root):
     """ the depth of children differs by at most 1 """
 
@@ -20,3 +23,29 @@ def is_balanced_tree_ver1(root):
     (_, is_balanced) = recursive_check(root)
 
     return is_balanced
+
+
+def walk_inorder(node):
+    if node is None:
+        return
+    walk_inorder(node.left)
+    log.info(node)
+    walk_inorder(node.right)
+
+
+def walk_preorder(node):
+    if node is None:
+        return
+    log.info(node)
+    walk_inorder(node.left)
+    walk_inorder(node.right)
+
+
+def walk_postorder(node):
+    if node is None:
+        return
+    walk_inorder(node.left)
+    walk_inorder(node.right)
+    log.info(node)
+
+
