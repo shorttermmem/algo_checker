@@ -1,27 +1,31 @@
 import unittest
 
 from algorithms.process_tree import *
-from common.logger import log
+from common.logger import *
 from common.tree_factory import BinaryTreeFactory
 
 
 class BinaryTreeTestCase(unittest.TestCase):
     """ Tests """
+    @test_case_decorator
     def test_perfect_tree(self):
         tree = BinaryTreeFactory.create_perfect_tree()
         log.debug(tree)
         self.assertTrue(True)
 
+    @test_case_decorator
     def test_complete_tree(self):
         tree = BinaryTreeFactory.create_complete_tree()
         log.debug(tree)
         self.assertTrue(True)
 
+    @test_case_decorator
     def test_full_tree(self):
         tree = BinaryTreeFactory.create_full_tree()
         log.debug(tree)
         self.assertTrue(True)
 
+    @test_case_decorator
     def test_is_balanced_tree(self):
         perfect_tree = BinaryTreeFactory.create_perfect_tree()
         log.debug(perfect_tree)
@@ -33,6 +37,7 @@ class BinaryTreeTestCase(unittest.TestCase):
         is_complete_tree_balanced = is_balanced_tree_ver1(complete_tree.get_root())
         self.assertTrue(is_complete_tree_balanced)
 
+    @test_case_decorator
     def test_tree_walk_sample(self):
         tree = BinaryTreeFactory.create_unbalanced_tree()
         log.info("Tree:")
@@ -60,11 +65,13 @@ class BinaryTreeTestCase(unittest.TestCase):
         self.assertFalse(is_unbalanced_tree_balanced)
 
     def setUp(self):
-        log.info("\nEnter " + __class__.__name__ + "...")
         self.trees = []
         self.trees.append(BinaryTreeFactory.create_perfect_tree())
         self.trees.append(BinaryTreeFactory.create_complete_tree())
         self.trees.append(BinaryTreeFactory.create_full_tree())
 
     def tearDown(self):
-        log.info("Done " + __class__.__name__ + "\n")
+        pass
+
+
+

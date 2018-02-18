@@ -1,13 +1,14 @@
 import unittest
 
 from algorithms.process_graph import is_directed_graph_ver1
-from common.logger import log
+from common.logger import *
 from common.graph_factory import GraphFactory
 import random
 
 
 class UndirectedGraphTestCase(unittest.TestCase):
     """ Tests """
+    @test_case_decorator
     def test_simple_graph(self):
 
         graph = GraphFactory.create_graph()
@@ -24,7 +25,8 @@ class UndirectedGraphTestCase(unittest.TestCase):
         self.assertTrue(True)
 
     def setUp(self):
-        log.info("\nEnter " + __class__.__name__ + "...")
+        pass
 
     def tearDown(self):
-        log.info("Done " + __class__.__name__ + "\n")
+        pass
+
