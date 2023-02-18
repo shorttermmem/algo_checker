@@ -8,3 +8,13 @@ Current
 Future
 * Graph
 * Sorting related
+
+---
+Run all tests:
+
+    python3 -m unittest
+
+Run individual test:
+
+    python3 -m unittest tests/test_tree.py
+
