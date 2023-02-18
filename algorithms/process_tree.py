@@ -37,15 +37,15 @@ def walk_preorder(node):
     if node is None:
         return
     log.info(node)
-    walk_inorder(node.left)
-    walk_inorder(node.right)
+    walk_preorder(node.left)
+    walk_preorder(node.right)
 
 
 def walk_postorder(node):
     if node is None:
         return
-    walk_inorder(node.left)
-    walk_inorder(node.right)
+    walk_postorder(node.left)
+    walk_postorder(node.right)
     log.info(node)
 
 
