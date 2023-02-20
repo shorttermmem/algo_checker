@@ -24,7 +24,7 @@ class UndirectedGraphTestCase(unittest.TestCase):
         self.assertTrue(True)
 
     def setUp(self):
-        log.info("\nEnter " + __class__.__name__ + "...")
+        log.info("Enter " + __class__.__name__ + "...")
 
     def tearDown(self):
         log.info("Done " + __class__.__name__ + "\n")

@@ -60,7 +60,7 @@ class BinaryTreeTestCase(unittest.TestCase):
         self.assertFalse(is_unbalanced_tree_balanced)
 
     def setUp(self):
-        log.info("\nEnter " + __class__.__name__ + "...")
+        log.info("Enter " + __class__.__name__ + "...")
         self.trees = []
         self.trees.append(BinaryTreeFactory.create_perfect_tree())
         self.trees.append(BinaryTreeFactory.create_complete_tree())
