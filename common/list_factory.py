@@ -1,9 +1,9 @@
-from core.list import ArrayList
+from typing import List
 
 
-class ArrayListFactory:
+class ListFactory:
     @staticmethod
-    def create_array_list():
-        arr = ArrayList([1, 2, 3, 4])
+    def create_list():
+        arr = list([1, 2, 3, 4])
         arr.extend([5, 6, 7, 8])
         return arr
