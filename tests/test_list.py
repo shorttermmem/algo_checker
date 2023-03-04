@@ -10,8 +10,6 @@ from core.list import ArrayList
 class MergeSortTestCase(unittest.TestCase):
     def test_simple_array(self):
         arr_b = ListFactory.create_list()
-        arr_a = List(['A', 'A', 'A', 'A'], max_size=len(arr_b) + 4)
-        log.debug(arr_a)
         log.debug(arr_b)
         self.assertTrue(True)
 
