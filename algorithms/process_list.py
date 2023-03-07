@@ -30,3 +30,43 @@ def findKthLargest(nums: List[int], k: int) -> int:
         return p
 
     return qselect(nums, 0, len(nums) - 1, len(nums) - k)
+
+
+def findPermutations(nums: List[int], k: int) -> List[List[int]]:
+    # P(n,k)
+    res = []
+    def backtracking(temp: List[int]):
+        if len(temp) == k:
+            res.append(temp.copy())
+            return 
+        
+        for n in nums:
+            if n not in temp:
+                temp.append(n)
+                backtracking(temp)
+                temp.pop()
+    backtracking([])
+    return res
+
+def findCombinations(nums: List[int], k: int):
+    # C(n,k)
+    res = []
+    def backtracking(temp: List[int], start: int):
+        if len(temp) == k:
+            res.append(temp.copy())
+            return
+
+        for i in range(start, len(nums)):
+            if nums[i] not in temp:
+                temp.append(nums[i])
+                backtracking(temp, i+1)
+                temp.pop()
+    backtracking([])
+    return res
+
+def findPowerSets(nums: List[int]): 
+    # C(n, 0) + C(n, 1) + ... + C(n,k)
+    res = []
+    for i in range(len(nums)):
+        res.extend(findCombinations(nums, i))
+    return res

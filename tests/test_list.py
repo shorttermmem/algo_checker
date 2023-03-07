@@ -1,11 +1,11 @@
 import unittest
+import math
 
 from algorithms.process_list import *
 from algorithms.process_linkedlist import *
 from common.logger import log
 from common.list_factory import ListFactory
 from common.linkedlist_factory import LinkedListFactory, Node, LinkedList
-from core.list import ArrayList
 
 class MergeSortTestCase(unittest.TestCase):
     def test_simple_array(self):
@@ -31,6 +31,23 @@ class LinkedListTestCase(unittest.TestCase):
         slow, fast = traverse2pointers(llist.head)
         self.assertTrue(slow.val == 5)
         self.assertTrue(fast is None)
+
+    def setUp(self):
+        log.info("Enter " + __class__.__name__ + "...")
+
+    def tearDown(self):
+        log.info("Done " + __class__.__name__ + "\n")
+
+class CombinatoricsTestCase(unittest.TestCase):
+    def test_permutations(self):
+        nums = ListFactory.create_list()
+        n = len(nums)
+        k = 2
+        res = findPermutations(nums, k)
+        self.assertTrue(
+            len(res) ==
+            math.factorial(n) / math.factorial(n-k))
+        log.debug(res)
 
     def setUp(self):
         log.info("Enter " + __class__.__name__ + "...")
