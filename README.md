@@ -18,3 +18,6 @@ Run individual test:
 
     python3 -m unittest tests/test_tree.py
 
+Discover new tests:
+    
+    python3 -m unittest discover -[s|t|p]
